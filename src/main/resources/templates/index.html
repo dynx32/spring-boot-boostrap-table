@@ -18,7 +18,7 @@
 				<form id="productForm" class="row g-3" novalidate>
 					<div class="col-12">
 						<label for="name" name="" class="form-label">Name</label>
-						<input type="number" class="form-control" id="id" name="id" placeholder="ID" readonly>
+						<input type="number" class="form-control" id="id" name="id" placeholder="ID" readonly hidden>
 						<input type="text" class="form-control" id="name" name="name" placeholder="Product Name" required>
 					</div>
 					<div class="col-12 input">
@@ -94,16 +94,10 @@
 					toolbar: '#toolbar',
 					buttons: {
 						btnAdd: {
-							text: 'Nuevo bien',
 							icon: 'fa-plus',
-							event: function () {
-								// show form								
-								$('#productForm')[0].reset();
-								$('#formContainer').removeAttr('hidden');
-								return;
-							},
+							event: showProductForm,							
 							attributes: {
-								title: 'Add a new row to the table'
+								title: 'New product'
 							}
 						}
 					},
@@ -121,14 +115,9 @@
 						};
 					},
 					columns: [
-						/*{
-							field: 'ids',
-							checkbox: true
-						},*/
 						{
 							field: 'id',
 							title: 'ID',
-							// align: 'center'
 						},
 						{
 							field: 'name',
@@ -139,10 +128,11 @@
 							title: 'Operaciones',
 							formatter: function (value, row, index) {
 
-								var details = '<button class="btn btn-sm btn-outline-primary" onclick="showProduct(\'' + row.id + '\')"> <i data-feather="file"></i> Details</button> ';
+								// var details = '<button class="btn btn-sm btn-outline-primary" onclick="showProduct(\'' + row.id + '\')"> <i data-feather="file"></i> Details</button> ';
 								var edit = '<button class="btn btn-sm btn-outline-success" onclick="editProduct(\'' + row.id + '\')"> <i data-feather="edit"></i> Edit</button> ';
 								var del_ = '<button class="btn btn-sm btn-outline-danger" onclick="deleteProduct(\'' + row.id + '\')"> <i data-feather="trash-2"></i> Delete</button> ';
-								return details + edit + del_;
+								// return details + edit + del_;
+								return edit + del_;
 							}
 						}
 					],
@@ -185,8 +175,6 @@
 
 		// cancel form
 		function cancelForm() {
-			console.log('cancelForm clicked');
-			// clean form
 			// hide form
 			$('#formContainer').prop('hidden', true);
 
@@ -228,9 +216,9 @@
 		// form related functions
 
 		// show product form
-		function showProductForm() {
-			$('#productForm')[0].reset();
-			$('#formContainer').removeAttr('hidden');
+		function showProductForm() {			
+			$('#productForm')[0].reset(); // clean
+			$('#formContainer').removeAttr('hidden'); // show
 		}
 
 		// hide product form

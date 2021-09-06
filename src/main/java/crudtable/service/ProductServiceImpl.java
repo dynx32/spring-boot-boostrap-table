@@ -1,4 +1,4 @@
-package crudtable.service.impl;
+package crudtable.service;
 
 import java.util.Optional;
 
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import crudtable.data.ProductRepository;
 import crudtable.model.Product;
-import crudtable.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {	

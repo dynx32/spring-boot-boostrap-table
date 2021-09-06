@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import crudtable.data.ProductRepository;
-import crudtable.dto.BootstrapTable;
 import crudtable.model.Product;
 import crudtable.service.ProductService;
 
@@ -34,14 +33,14 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping("/list")
-	public ResponseEntity<BootstrapTable<Product>> listProducts(@RequestParam(value = "page", defaultValue = "0") Integer pageNo,
+	public ResponseEntity<CRUDTableResponse<Product>> listProducts(@RequestParam(value = "page", defaultValue = "0") Integer pageNo,
 															  @RequestParam(value = "limit", defaultValue = "10") Integer pageSize,
 															  @RequestParam(value = "name", required = false) String name) {			
 		Pageable pageRequest = PageRequest.of(pageNo, pageSize);
 		
 		Page<Product> result = productService.search(name, pageRequest);
 
-		BootstrapTable<Product> bTable = new BootstrapTable<>();
+		CRUDTableResponse<Product> bTable = new CRUDTableResponse<>();
 		
 		if (result.isEmpty()) {
 			String errorMessage = "No products found.";
@@ -86,7 +85,7 @@ public class ProductController {
 		if (Objects.isNull(product)) {
 			return new ResponseEntity<>(new ActionResult(true, String.format("No products found for  'id:%d'.", id), null), new HttpHeaders(), HttpStatus.NOT_FOUND);
 		}		
-		return new ResponseEntity<>(new ActionResult(true, String.format("Loading producto for 'id:%d'.", id), product), new HttpHeaders(), HttpStatus.OK);
+		return new ResponseEntity<>(new ActionResult(true, String.format("Loading product for 'id:%d'.", id), product), new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/delete/{id}")
