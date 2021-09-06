@@ -9,7 +9,7 @@
 		<version>2.5.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>org.dynx</groupId>
+	<groupId>org.dynx32</groupId>
 	<artifactId>spring-crud-table</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
